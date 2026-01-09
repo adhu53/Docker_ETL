@@ -2,6 +2,7 @@ import requests
 import datetime
 import csv
 import pymysql
+import time
 
 def pull_file(git_url,today,filename):
     response=requests.get(git_url)
@@ -26,6 +27,7 @@ def update_sql_db(eid,ename,esal,ecity,mod):
                 return
             sql="insert into employee_records (eid,ename,esal,ecity) values (%s, %s, %s, %s)"
             cursor.execute(sql, (eid,ename,esal,ecity))
+            conn.commit()
         elif mod=="D":
             sql="delete from employee_records where eid=%s"
             cursor.execute(sql,eid)
@@ -73,19 +75,25 @@ def process_file(filename):
 
 
 def main(last_processed_date,today,git_url,filename):
-    if last_processed_date==None:
-        print("file processing for the first time")
-        pull_status=pull_file(git_url,today,filename)
-        if pull_status==False:
-            print("Processing failed, check log for more details")
-            return
-        process_file(filename)
-    elif last_processed_date==today:
-        print("File already processed for today")
-    else:
-        #process the file
-        print()
-    last_processed_date=today
+    while True:
+        if last_processed_date==None:
+            print("file processing for the first time")
+            pull_status=pull_file(git_url,today,filename)
+            if pull_status==False:
+                print("Processing failed, check log for more details")
+                return
+            process_file(filename)
+        elif last_processed_date==today:
+            print("File already processed for today")
+        else:
+            pull_status=pull_file(git_url,today,filename)
+            if pull_status==False:
+                print("Processing failed, check log for more details")
+                return
+            process_file(filename)
+         
+        time.sleep(60)    
+        last_processed_date=today
 
 #get the name of the file to be processed
 git_url="https://raw.githubusercontent.com/adhu53/Docker_ETL/refs/heads/main/employees_2026-01-09.csv"
