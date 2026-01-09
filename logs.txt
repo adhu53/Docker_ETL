@@ -1,0 +1,4 @@
+2026-01-09 22:21:37.541112:<bound method Response.raise_for_status of <Response [404]>> File not found error
+2026-01-09 22:22:05.986519:<bound method Response.raise_for_status of <Response [404]>> File not found error
+2026-01-09 22:22:13.273912:<bound method Response.raise_for_status of <Response [404]>> File not found error
+2026-01-09 22:22:33.382125:<bound method Response.raise_for_status of <Response [404]>> File not found error
