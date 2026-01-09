@@ -104,3 +104,4 @@ last_processed_date=None
 
 if __name__=="__main__":
     main(last_processed_date,today,git_url,filename)
+    
