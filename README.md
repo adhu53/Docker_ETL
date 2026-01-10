@@ -11,6 +11,7 @@
 ##### C - one or more fiels in the record has been changed.
 ##### logs:logs.txt
 ##### frequency: runs once a day or can be even scheduled to run every hour. Once the file is processed for the day, next day it starts processing again when new feed is received.  
-###################################################
+##########
 ########## The continous monitoring of github repo using the while loop can be eliminated by using a cron job or by automating using cloud scheduler.
 ########## https://hub.docker.com/r/adarsh53/hadoop-etl -- to download the image - docker pull adarsh53/hadoop-etl:v1
+
