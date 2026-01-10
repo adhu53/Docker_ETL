@@ -102,7 +102,7 @@ def main(last_processed_date,today,git_url,filename):
                 process_file(filename)
                 last_processed_date=today
          
-        time.sleep(10)    
+        time.sleep(60*60)    
         
 
 #get the name of the file to be processed
@@ -117,3 +117,4 @@ last_processed_date=None
 if __name__=="__main__":
     main(last_processed_date,today,git_url,filename)
     
+
