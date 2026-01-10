@@ -1,0 +1,30 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql_db
+    environment:
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_DATABASE: jan
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - mysqln_w
+    ports:
+      - "3307:3306"
+  etl:
+    build: .
+    restart: always 
+    container_name: etl_v1_0
+    depends_on:
+     - mysql
+    networks:
+      - mysqln_w
+volumes:
+  mysql_data:
+    driver: local
+    labels:
+      createdby: adarsh
+networks:
+  mysqln_w:
+    driver: bridge

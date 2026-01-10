@@ -1,0 +1,7 @@
+hadoop@ubuntu:~$ cat dockerfile 
+FROM python:3.10-slim
+LABEL maintainer=Adarsh
+RUN pip install --no-cache-dir pymysql requests cryptography
+WORKDIR /opt/apps/
+COPY etl.py .
+CMD ["python3", "etl.py"]
